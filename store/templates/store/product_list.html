@@ -1,0 +1,87 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Product Catalog | AuraStore{% endblock %}
+
+{% block content %}
+
+<!-- Hero Banner -->
+<section class="hero-banner">
+    <div class="hero-content">
+        <h1>Discover Next-Gen Products & Aesthetics</h1>
+        <p>Explore curated gadgets, fashion, and home essentials crafted with modern tech and premium build quality.</p>
+        <div style="display: flex; gap: 1rem;">
+            <a href="#catalog" class="btn-gradient">
+                <i class="bi bi-bag-fill"></i> Shop Now
+            </a>
+            <a href="https://github.com" target="_blank" class="btn-secondary">
+                <i class="bi bi-github"></i> CodeAlpha Repo
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Category Filter Pills -->
+<section id="catalog">
+    <div class="category-filter-bar">
+        <a href="{% url 'store:product_list' %}" class="category-pill {% if not selected_category %}active{% endif %}">
+            <i class="bi bi-app-indicator"></i> All Products
+        </a>
+        {% for cat in categories %}
+            <a href="{% url 'store:product_list' %}?category={{ cat.slug }}" class="category-pill {% if selected_category == cat.slug %}active{% endif %}">
+                <i class="bi {{ cat.icon }}"></i> {{ cat.name }}
+            </a>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Product Grid -->
+<section class="products-grid">
+    {% for product in products %}
+        <div class="product-card">
+            <div class="product-img-wrapper">
+                <img src="{{ product.image_url }}" alt="{{ product.name }}" class="product-img" loading="lazy">
+                {% if product.is_featured %}
+                    <span class="badge-featured">Featured</span>
+                {% endif %}
+            </div>
+            
+            <div class="product-body">
+                <span class="product-category">{{ product.category.name }}</span>
+                <h3 class="product-title">
+                    <a href="{% url 'store:product_detail' product.slug %}">{{ product.name }}</a>
+                </h3>
+
+                <div class="product-rating">
+                    <i class="bi bi-star-fill"></i>
+                    <span>{{ product.rating }}</span>
+                    <span style="color: var(--text-muted);">({{ product.stock }} in stock)</span>
+                </div>
+
+                <div class="product-footer">
+                    <div class="price-box">
+                        <span class="current-price">${{ product.price }}</span>
+                        {% if product.original_price %}
+                            <span class="original-price">${{ product.original_price }}</span>
+                        {% endif %}
+                    </div>
+
+                    <form action="{% url 'store:add_to_cart' product.id %}" method="POST" class="ajax-add-to-cart">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-gradient" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                            <i class="bi bi-cart-plus-fill"></i> Add
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; background: var(--bg-card); border-radius: var(--radius-md);">
+            <i class="bi bi-box-seam" style="font-size: 3rem; color: var(--text-muted);"></i>
+            <h3 style="margin-top: 1rem;">No Products Found</h3>
+            <p style="color: var(--text-secondary); margin-top: 0.5rem;">Try adjusting your search query or filter settings.</p>
+            <a href="{% url 'store:product_list' %}" class="btn-secondary" style="margin-top: 1.5rem;">Reset Filter</a>
+        </div>
+    {% endfor %}
+</section>
+
+{% endblock %}

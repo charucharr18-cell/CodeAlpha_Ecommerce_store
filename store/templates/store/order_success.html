@@ -1,0 +1,44 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Order Confirmed #{{ order.id }} | AuraStore{% endblock %}
+
+{% block content %}
+
+<div style="max-width: 650px; margin: 3rem auto; text-align: center; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 3rem 2rem; box-shadow: var(--shadow-lg);">
+    <div style="width: 80px; height: 80px; background: rgba(16, 185, 129, 0.2); border: 2px solid var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: var(--success); font-size: 2.5rem;">
+        <i class="bi bi-check-lg"></i>
+    </div>
+
+    <h1 style="font-size: 2.2rem; font-weight: 800;">Order Confirmed!</h1>
+    <p style="color: var(--text-secondary); margin-top: 0.5rem; font-size: 1.05rem;">
+        Thank you, <strong>{{ order.full_name }}</strong>! Your order <strong>#{{ order.id }}</strong> has been placed successfully.
+    </p>
+
+    <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem; margin: 2rem 0; text-align: left;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.8rem;">
+            <span style="color: var(--text-muted);">Status:</span>
+            <span style="color: var(--success); font-weight: 700;">{{ order.status }}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.8rem;">
+            <span style="color: var(--text-muted);">Delivery Address:</span>
+            <span style="color: #fff;">{{ order.address }}, {{ order.city }} ({{ order.zip_code }})</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+            <span style="color: var(--text-muted);">Total Paid:</span>
+            <span style="color: #fff; font-weight: 800; font-size: 1.1rem;">${{ order.total_price }}</span>
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: center; gap: 1rem;">
+        <a href="{% url 'store:product_list' %}" class="btn-gradient">
+            <i class="bi bi-bag-fill"></i> Continue Shopping
+        </a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'store:order_history' %}" class="btn-secondary">
+                View My Orders
+            </a>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

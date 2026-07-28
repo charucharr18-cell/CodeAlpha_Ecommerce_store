@@ -1,0 +1,79 @@
+{% extends 'store/base.html' %}
+
+{% block title %}{{ product.name }} | AuraStore{% endblock %}
+
+{% block content %}
+
+<div style="margin-bottom: 1.5rem;">
+    <a href="{% url 'store:product_list' %}" class="btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+        <i class="bi bi-arrow-left"></i> Back to Products
+    </a>
+</div>
+
+<div class="product-detail-container">
+    <div class="detail-img-box">
+        <img src="{{ product.image_url }}" alt="{{ product.name }}">
+    </div>
+
+    <div>
+        <span class="product-category" style="font-size: 0.9rem;">{{ product.category.name }}</span>
+        <h1 style="font-size: 2.2rem; font-weight: 800; margin: 0.5rem 0 1rem;">{{ product.name }}</h1>
+
+        <div class="product-rating" style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+            <i class="bi bi-star-fill"></i>
+            <span style="font-weight: 700; color: #fff;">{{ product.rating }}</span>
+            <span style="color: var(--text-muted); font-size: 0.9rem;">• {{ product.stock }} items remaining in stock</span>
+        </div>
+
+        <div style="display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.5rem;">
+            <span style="font-size: 2.4rem; font-weight: 800; color: #fff;">${{ product.price }}</span>
+            {% if product.original_price %}
+                <span style="font-size: 1.2rem; color: var(--text-muted); text-decoration: line-through;">${{ product.original_price }}</span>
+                <span class="badge-featured" style="position: static; font-size: 0.8rem;">Save ${{ product.original_price|add:product.price }}</span>
+            {% endif %}
+        </div>
+
+        <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 2rem; line-height: 1.7;">
+            {{ product.description }}
+        </p>
+
+        <form action="{% url 'store:add_to_cart' product.id %}" method="POST" style="display: flex; gap: 1rem; align-items: center;">
+            {% csrf_token %}
+            <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: var(--radius-pill); padding: 0.4rem 1rem;">
+                <label for="quantity" style="font-weight: 600; font-size: 0.9rem; color: var(--text-secondary);">Qty:</label>
+                <input type="number" id="quantity" name="quantity" value="1" min="1" max="{{ product.stock }}" style="width: 50px; background: transparent; border: none; color: #fff; font-weight: 700; font-size: 1rem; text-align: center;">
+            </div>
+
+            <button type="submit" class="btn-gradient" style="padding: 0.9rem 2rem;">
+                <i class="bi bi-cart-plus-fill"></i> Add to Cart
+            </button>
+        </form>
+    </div>
+</div>
+
+{% if related_products %}
+<section style="margin-top: 4rem;">
+    <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;">Related Products</h2>
+    <div class="products-grid">
+        {% for prod in related_products %}
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="{{ prod.image_url }}" alt="{{ prod.name }}" class="product-img">
+                </div>
+                <div class="product-body">
+                    <span class="product-category">{{ prod.category.name }}</span>
+                    <h3 class="product-title">
+                        <a href="{% url 'store:product_detail' prod.slug %}">{{ prod.name }}</a>
+                    </h3>
+                    <div class="product-footer">
+                        <span class="current-price">${{ prod.price }}</span>
+                        <a href="{% url 'store:product_detail' prod.slug %}" class="btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">View</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{% endblock %}
