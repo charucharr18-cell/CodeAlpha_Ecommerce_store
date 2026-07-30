@@ -1,21 +1,21 @@
-# 🛒 CodeAlpha E-Commerce Store (`CodeAlpha_Ecommerce_store`)
+#  CodeAlpha E-Commerce Store (`CodeAlpha_Ecommerce_store`)
 
 A full-stack, responsive, modern E-commerce web application built for the **CodeAlpha Full Stack Web Development Internship**.
 
 ---
 
-## 📌 Project Features
+##  Project Features
 
-- 🛍️ **Product Catalog & Search**: Interactive grid featuring product categories, real-time search filtering, prices, badges, and stock levels.
-- 🔍 **Product Details Page**: High-resolution image gallery display, stock availability indicator, detailed specifications, and quantity selection.
-- 🛒 **Dynamic Shopping Cart**: Real-time quantity adjustment, AJAX cart updates, automatic subtotal/shipping/tax calculation, and cart item removal.
-- 💳 **Order Processing & Checkout**: Checkout form capturing shipping details, automatic stock reduction, order summary breakdown, and order confirmation.
-- 👤 **User Registration & Login**: Built-in Django authentication allowing user signup, login, logout, and order history tracking.
-- 🎨 **Modern Dark Glassmorphism UI**: Premium aesthetic with Google Font Inter, custom CSS glassmorphic cards, vibrant gradient accents, and responsive layout.
+-  **Product Catalog & Search**: Interactive grid featuring product categories, real-time search filtering, prices, badges, and stock levels.
+-  **Product Details Page**: High-resolution image gallery display, stock availability indicator, detailed specifications, and quantity selection.
+-  **Dynamic Shopping Cart**: Real-time quantity adjustment, AJAX cart updates, automatic subtotal/shipping/tax calculation, and cart item removal.
+-  **Order Processing & Checkout**: Checkout form capturing shipping details, automatic stock reduction, order summary breakdown, and order confirmation.
+-  **User Registration & Login**: Built-in Django authentication allowing user signup, login, logout, and order history tracking.
+-  **Modern Dark Glassmorphism UI**: Premium aesthetic with Google Font Inter, custom CSS glassmorphic cards, vibrant gradient accents, and responsive layout.
 
 ---
 
-## 🛠️ Technology Stack
+##  Technology Stack
 
 | Layer | Technology Used |
 | :--- | :--- |
@@ -26,7 +26,7 @@ A full-stack, responsive, modern E-commerce web application built for the **Code
 
 ---
 
-## 🚀 Step-by-Step Execution Guide
+##  Step-by-Step Execution Guide
 
 ### Step 1: Clone or Download the Project
 ```bash
@@ -74,54 +74,9 @@ python manage.py runserver
 ```
 Open your browser and visit: **`http://127.0.0.1:8000/`**
 
----
+--
 
-## 📤 Step-by-Step GitHub Upload Guide (CodeAlpha Submission)
-
-1. **Initialize Git in the project root**:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit: CodeAlpha E-Commerce Store project"
-   ```
-
-2. **Create a new repository on GitHub**:
-   - Go to [GitHub New Repository](https://github.com/new)
-   - Repository Name: **`CodeAlpha_Ecommerce_store`**
-   - Set visibility to **Public**
-   - Click **Create repository**
-
-3. **Link your local repository and push**:
-   ```bash
-   git branch -M main
-   git remote add origin https://github.com/YOUR_GITHUB_USERNAME/CodeAlpha_Ecommerce_store.git
-   git push -u origin main
-   ```
-
----
-
-## 📢 Step-by-Step LinkedIn Post & Submission Checklist
-
-1. **Record a Video Explanation**:
-   - Record a short 1–2 minute screen demo showing:
-     - Browsing product catalog & category filters.
-     - Viewing product details and adding items to cart.
-     - Adjusting quantities in the shopping cart.
-     - Completing the checkout form and order placement.
-     - User registration/login feature.
-
-2. **Post on LinkedIn**:
-   - Post your demo video on LinkedIn.
-   - Tag **@CodeAlpha** in your post content.
-   - Include your GitHub Repository URL (`https://github.com/YOUR_GITHUB_USERNAME/CodeAlpha_Ecommerce_store`).
-   - Mention your internship domain (*Full Stack Development*).
-
-3. **Submit Task Form**:
-   - Copy your GitHub Repository link and LinkedIn post link into the official CodeAlpha submission form.
-
----
-
-## 📂 Project Directory Structure
+## Project Directory Structure
 
 ```
 CodeAlpha_Ecommerce_store/
